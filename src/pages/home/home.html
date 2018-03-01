@@ -1,0 +1,36 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>
+            Todo list
+        </ion-title>
+    </ion-navbar>
+    <ion-select (ionChange)="filterTodo()" [(ngModel)]="selectedFilter" end>
+        <ion-option *ngFor="let item of filterList">{{item}}</ion-option>
+    </ion-select>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-list>
+        <ion-item-sliding *ngFor="let todo of todoList; let pos=index">
+            <ion-item>
+                <ion-checkbox [checked]="todo.done" item-left (ionChange)="changeDone(todo)"></ion-checkbox>
+                <ion-label>{{todo.task}}</ion-label>
+            </ion-item>
+            <ion-item-options>
+                <button ion-button color="danger" (click)="delete(pos)">
+                  <ion-icon name="trash"></ion-icon>
+                </button>
+                <button ion-button (click)="edit(todo)">
+                  <ion-icon name="create" ></ion-icon>
+              </button>
+            </ion-item-options>
+        </ion-item-sliding>
+    </ion-list>
+
+</ion-content>
+
+<ion-footer>
+    <button ion-button (click)="add()" full>Nouvelle tâche</button>
+</ion-footer>
